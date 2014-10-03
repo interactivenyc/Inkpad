@@ -34,6 +34,7 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
+    NSLog(@"[ %@ ] initWithCoder.",self.class);
     self = [super initWithCoder:aDecoder];
 
     if (!self) {
@@ -56,6 +57,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(drawingRenamed:) name:WDDrawingRenamed object:nil];
     [self updateShadow_];
+    
+    NSLog(@"WDThumbnailView initWithFrame");
 
     return self;
 }
@@ -67,6 +70,8 @@
 
 - (void) setSelected:(BOOL)flag
 {
+    NSLog(@"[ %@ ] setSelected.",self.class);
+    
     [super setSelected:flag];
     
     if (!shouldShowSelectionIndicator) {
@@ -169,6 +174,8 @@
     
     filename_ = filename;
     
+    NSLog(@"[ %@ ] setFilename %@",self.class, filename);    
+    
     if (!titleLabel_) {
         titleLabel_ = [UIButton buttonWithType:UIButtonTypeCustom];
         titleLabel_.frame = CGRectMake(0, 0, self.bounds.size.width, kTitleFieldHeight);
@@ -250,6 +257,8 @@
 
 - (void) setHighlighted:(BOOL)highlighted
 {
+    NSLog(@"[ %@ ] setHighlighted.",self.class);
+    
     if (highlighted) {
         UIView *view = [[UIView alloc] initWithFrame:imageView_.bounds];
         view.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.25f];
@@ -286,6 +295,7 @@
 
 - (void) startActivity
 {
+    NSLog(@"[ %@ ] startActivity.",self.class);
     if (self.superview) {
         activityView_ = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         
