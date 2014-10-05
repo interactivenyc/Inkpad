@@ -76,19 +76,23 @@ NSString *WDDropboxWasUnlinkedNotification = @"WDDropboxWasUnlinkedNotification"
 {
     [self applicationDidFinishLaunching:application];
     
+    NSLog(@"[ %@ ] application didFinishLaunchingWithOptions",self.class);
+    
     if (launchOptions) {
         NSURL *url = launchOptions[UIApplicationLaunchOptionsURLKey];
         
         if (url) {
+            NSLog(@"[ %@ ] url: %@.",self.class, url);
             return [self validFile:url];
         }
     }
-    
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+    NSLog(@"[ %@ ] openURL: %@.",self.class,url);
+    
     if ([[DBSession sharedSession] handleOpenURL:url]) {
         if ([[DBSession sharedSession] isLinked]) {
             if (self.performAfterDropboxLoginBlock) {
@@ -133,6 +137,8 @@ NSString *WDDropboxWasUnlinkedNotification = @"WDDropboxWasUnlinkedNotification"
 
 - (void) setupDefaults
 {
+    NSLog(@"[ %@ ] setupDefaults.",self.class);
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *defaultPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Defaults.plist"];
     [defaults registerDefaults:[NSDictionary dictionaryWithContentsOfFile:defaultPath]];

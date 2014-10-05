@@ -43,6 +43,8 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 {
     self = [super initWithCoder:aDecoder];
     
+    NSLog(@"[ %@ ] initWithCoder.",self.class);
+    
     if (!self) {
         return nil;
     }
